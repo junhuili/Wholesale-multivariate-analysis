@@ -21,7 +21,7 @@ This [multivariate analysis](https://rawgit.com/olalakul/Wholesale-multivariate-
 
 ![discriminant_analysis](wholesale-multivariate_files/figure-html/segments25-1.png)
 
-Some segments are pretty interesting. Here we display actual revenues instead of log-revenues
+Some segments are pretty interesting.
 
 5) Customers in segment 5 are buying very little (in comparison to average values) Fresh, Frozen and Delicassen.
 Shouldn't you (as a careful businessmen) check why and what is going on?

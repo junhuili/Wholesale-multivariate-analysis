@@ -27,7 +27,7 @@ library(ROCR)
 
 
 ```{r, cache=TRUE, results='hide'}
-sale = read.csv("WholesaleCustomer.csv", header=TRUE)
+sale = read.csv("/home/olga/myR/WholesaleCustomer/WholesaleCustomer.csv", header=TRUE)
 colnames(sale)[7] = "Detergents" # rename "Detergents_Paper" for brevity
 sale = within(sale, {Channel[Channel == 1] <- "Cafe" 
                      Channel[Channel == 2] <- "Retail" 
@@ -219,7 +219,8 @@ l1sale.cor = cor(l1sale[,products]); l1sale.cor
 ```
 
 ```{r l1sale_pairs, echo=FALSE, fig.width=11, fig.height=11}
-ggpairs(data=l1sale, columns=seq(3,8), color="Channel", upper = list(params = c(size = 4))) + ggplot2::theme_bw()
+ggpairs(data=l1sale, columns=seq(3,8), mapping=ggplot2::aes(color=Channel), upper = list(size = 4)) + ggplot2::theme_bw()
+
 ```
 
 Let us try to determine the (independent) latent variables responsible for the variety of the observed revenues. Suitable here is exploratory factor analysis.
@@ -360,7 +361,7 @@ A good tool to assess the quality of clustering is the silhouette diagram.
 It shows which objects lie well within their cluster, and which ones are merely somewhere in between clusters. 
 ```{r ag3_silhouette, message=FALSE, warning=FALSE, fig.show='asis', fig.keep='all'}
 si.ag3 = silhouette(as.numeric(l1sale$ag3), di); 
-plot(si.ag3, col=group_color, which=2,
+plot(si.ag3, col=group_color, border=NA,
                 main="Silhouette plot for 3 groups from aglomerative clustering")
 ```
 
@@ -421,7 +422,7 @@ Does partitioning around medoids indeed found distinct clusters in this dataset?
 Silhouette plot (low values of silhouette width) again indicates no significant structure in data.
 ```{r pam3_silhouete}
 si.pam3 = silhouette(as.numeric(l1sale$pam3), di)
-plot(si.pam3, col=group_color, which=2, main="Silhouette plot for 3 groups found by PAM")
+plot(si.pam3, col=group_color, border=NA, main="Silhouette plot for 3 groups found by PAM")
 ```
 
 #### What to do or is clustering meaningful for this dataset?
